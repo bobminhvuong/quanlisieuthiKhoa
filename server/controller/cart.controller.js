@@ -9,11 +9,20 @@ module.exports = {
 }
 var Model = 'carts'
 function getAllCart(req, res) {
-    genericService.getAll(Model).then((Response) => {
-        res.send(Response);
-    }).catch((err) => {
-        res.send(err);
-    })
+    if(req.query){
+        genericService.getAllByValue(req.query,Model).then((Response) => {
+            res.send(Response);
+        }).catch((err) => {
+            res.send(err);
+        })
+    }else{
+        genericService.getAll(Model).then((Response) => {
+            res.send(Response);
+        }).catch((err) => {
+            res.send(err);
+        })
+    }
+   
 }
 function getCartById(req, res) {
     genericService.getById(req.params.id, Model).then((Response) => {
