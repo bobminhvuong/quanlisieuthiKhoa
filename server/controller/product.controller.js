@@ -9,7 +9,7 @@ module.exports = {
 }
 var Model = 'products'
 function getAllProduct(req, res) {
-    if(req.query){
+    if(Object.keys(req.query).length>0){
         genericService.getAllByValue(req.query,Model).then((Response) => {
             res.send(Response);
         }).catch((err) => {

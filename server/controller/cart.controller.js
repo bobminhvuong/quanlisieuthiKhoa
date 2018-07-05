@@ -9,13 +9,15 @@ module.exports = {
 }
 var Model = 'carts'
 function getAllCart(req, res) {
-    if(req.query){
+    if(Object.keys(req.query).length>0){
         genericService.getAllByValue(req.query,Model).then((Response) => {
             res.send(Response);
         }).catch((err) => {
             res.send(err);
         })
     }else{
+        console.log(12121);
+        
         genericService.getAll(Model).then((Response) => {
             res.send(Response);
         }).catch((err) => {

@@ -19,8 +19,6 @@ function createCart(req) {
 function updateCart(id, req) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM carts WHERE id='+id,function(err,response){
-            console.log(response[0].id);
-            
             if(err){
                 reject(err);
             }else{
@@ -29,10 +27,8 @@ function updateCart(id, req) {
                         totalPrice: req.totalPrice || response[0].totalPrice,
                         userCreate: req.userCreate || response[0].userCreate,
                         idstatistics: req.idstatistics || response[0].idstatistics,
-                        updateAt: req.updateAt
-
                     }
-                    connection.query('UPDATE `carts` SET `totalPrice`=' + NewData.totalPrice + ', `userCreate`=' + NewData.userCreate + ',`updateAt`=' + NewData.updateAt + ',`idstatistics`=' + NewData.idstatistics + ' WHERE id=' + id, function (err, result) {
+                    connection.query('UPDATE `carts` SET `totalPrice`=' + NewData.totalPrice + ', `userCreate`=' + NewData.userCreate + ',`idstatistics`=' + NewData.idstatistics + ' WHERE id=' + id, function (err, result) {
                         if (err) {
                             reject(err);
                         } else {

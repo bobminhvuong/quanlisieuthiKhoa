@@ -1,10 +1,12 @@
 var jwt = require('./../utils/jwt');
 var fs = require('fs');
 var path = require('path');
-var userService = require('../service/user.service');
+var auth = require('../service/auth.service');
+var config = require('./../config')
+var message = require('./../utils/message');
 exports.auth = function () {
     return function (req, res, next) {
-        var token = req.headers['x-access-token'];
+        var token = req.headers[config.TOKEN];
         if (token) {
             jwt.verify(token, function (err, decodedData) {
                 if (err) {
@@ -14,21 +16,18 @@ exports.auth = function () {
                     });
                 } else {
                     var email = decodedData.email;
-                    userService.getUserByEmail(email).then(function(response){
+                    auth.getUserByEmail(email).then(function(response){
                         req.user = response;
                         next();
                     }).catch(function(err){
-                        res.json({
-                            statuscode: 401,
-                            message: "user invalid"
-                        });
+                        res.json(err);
                     });
                 }
             });
         } else {
             res.json({
-                statuscode: 401,
-                message: "not exist Authorized"
+                statuscode: message.STATUS_CODE.ERROR,
+                message: message.ERROR_MESSAGE.AUTH.NOT_AUTHORIZED
             });
         }
     }

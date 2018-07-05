@@ -1,8 +1,29 @@
 var jwt = require('./../utils/jwt');
 var connection = require('./../db/index');
+var message =require('./../utils/message');
 module.exports = {
     login:login,
-    getUserByToken:getUserByToken
+    getUserByToken:getUserByToken,
+    getUserByEmail:getUserByEmail
+}
+function getUserByEmail(email){
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM user WHERE email='+email,function(err, response){
+            if(err){
+                reject(err)
+            }else{
+                if(response.length == 0){
+                    reject({
+                        statusCode:message.ERROR_MESSAGE.AUTH.NOT_AUTHORIZED,
+                        message: message.ERROR_MESSAGE.AUTH.NOT_AUTHORIZED
+                    });
+                }else{
+                    resolve(response[0])
+                }
+            }
+        });
+    });
+    
 }
 function getUserByToken(token){
     return new Promise((resolve, reject) => {
