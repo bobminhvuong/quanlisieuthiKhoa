@@ -1,24 +1,19 @@
 var userService = require('./../service/auth.service');
+var authController = require('./../service/auth.service')
+var config = require('./../config');
 module.exports = {
     login: login,
     getUserByToken: getUserByToken
 }
 function login(req, res) {
-    var request = {
-        email: req.body.email,
-        password: req.body.password
-    }
-    userService.login(request).then(function (token) {
-        res.send(token);
-    }).catch(function (err) {
-        res.send(err)
-    });
-
+   authController.login(req.body).then((response)=>{
+       res.send(response);
+   }).catch((err)=>{
+       res.send(err);
+   })
 }
 function getUserByToken(req, res) {
-    console.log(123);
-
-    var token = req.headers['x-access-token'];
+    var token = req.headers[config.TOKEN];
     userService.getUserByToken(token).then(function (response) {
         res.send(response);
     })

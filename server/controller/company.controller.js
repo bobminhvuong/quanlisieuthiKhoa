@@ -9,11 +9,19 @@ module.exports = {
 }
 var Model = 'companys'
 function getAllCompany(req, res) {
-    genericService.getAll(Model).then((Response) => {
-        res.send(Response);
-    }).catch((err) => {
-        res.send(err);
-    })
+    if (req.query) {
+        genericService.getAllByValue(req.query, Model).then((Response) => {
+            res.send(Response);
+        }).catch((err) => {
+            res.send(err);
+        })
+    } else {
+        genericService.getAll(Model).then((Response) => {
+            res.send(Response);
+        }).catch((err) => {
+            res.send(err);
+        })
+    }
 }
 function getCompanyById(req, res) {
     genericService.getById(req.id, Model).then((Response) => {
@@ -29,7 +37,7 @@ function deleteCompanyById(req, res) {
         res.send(err);
     })
 }
-function createCompany(req,res) {
+function createCompany(req, res) {
     companyController.createCompany(req.body).then((Response) => {
         res.send(Response);
     }).catch((err) => {
@@ -37,7 +45,7 @@ function createCompany(req,res) {
     })
 }
 function updateCompany() {
-    companyController.updateCompany(req.params.id,req.body).then((Response) => {
+    companyController.updateCompany(req.params.id, req.body).then((Response) => {
         res.send(Response);
     }).catch((err) => {
         res.send(err);

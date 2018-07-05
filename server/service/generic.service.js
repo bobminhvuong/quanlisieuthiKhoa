@@ -6,29 +6,111 @@ module.exports = {
     getById: getById,
     getAllByValue: getAllByValue
 }
-function getAllByValue(req, Model) {
-    console.log(Object.getOwnPropertyNames(req));
+async function getAllByValue(req, Model) {
     var a = Object.getOwnPropertyNames(req);
-    
-    var where = "WHERE ";
-    if(where != ""){
-        for (var i = 1; i <= a.length; i++) {
-            if (a.length = 1){
-               where = where+a[i-1];
-                var b=0;
-            }else{
-                where = where+a[i-1];
+    if (a.length) {
+        return new Promise((resolve, reject) => {
+            if (a.length === 1) {
+                var value = req[Object.keys(req)[0]];
+                connection.query('SELECT * FROM ' + Model + ' WHERE ' + a[0] + '=' + value, function (err, response) {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        if (response != "") {
+                            resolve(response)
+                        } else {
+                            reject({
+                                statusCode: message.GENERICSTATUS.NOTFOUND,
+                                message: message.GENERIC.QUERY_NO_VALID
+                            });
+                        }
+                    }
+                });
+            } else if (a.length === 2) {
+                var value = req[Object.keys(req)[0]];
+                var value1 = req[Object.keys(req)[1]];
+                connection.query('SELECT * FROM ' + Model + ' WHERE ' + a[0] + '=' + value + ' and ' + a[1] + '=' + value1, function (err, response) {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        if (response != "") {
+                            resolve(response)
+                        } else {
+                            reject({
+                                statusCode: message.GENERICSTATUS.NOTFOUND,
+                                message: message.GENERIC.QUERY_NO_VALID
+                            });
+                        }
+                    }
+                });
+            } else if (a.length === 3) {
+                var value = req[Object.keys(req)[0]];
+                var value1 = req[Object.keys(req)[1]];
+                var value2 = req[Object.keys(req)[2]];
+                connection.query('SELECT * FROM ' + Model + ' WHERE ' + a[0] + '=' + value + ' and ' + a[1] + '=' + value1 + ' and ' + a[2] + '=' + value2, function (err, response) {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        if (response != "") {
+                            resolve(response)
+                        } else {
+                            reject({
+                                statusCode: message.GENERICSTATUS.NOTFOUND,
+                                message: message.GENERIC.QUERY_NO_VALID
+                            });
+                        }
+                    }
+                });
+            } else if (a.length === 4) {
+                var value = req[Object.keys(req)[0]];
+                var value1 = req[Object.keys(req)[1]];
+                var value2 = req[Object.keys(req)[2]];
+                var value3 = req[Object.keys(req)[3]];
+                connection.query('SELECT * FROM ' + Model + ' WHERE ' + a[0] + '=' + value + ' and ' + a[1] + '=' + value1 + ' and ' + a[2] + '=' + value2 + ' and ' + a[3] + '=' + value3, function (err, response) {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        if (response != "") {
+                            resolve(response)
+                        } else {
+                            reject({
+                                statusCode: message.GENERICSTATUS.NOTFOUND,
+                                message: message.GENERIC.QUERY_NO_VALID
+                            });
+                        }
+                    }
+                });
+            } else if (a.length === 5) {
+                var value = req[Object.keys(req)[0]];
+                var value1 = req[Object.keys(req)[1]];
+                var value2 = req[Object.keys(req)[2]];
+                var value3 = req[Object.keys(req)[3]];
+                var value4 = req[Object.keys(req)[4]];
+                connection.query('SELECT * FROM ' + Model + ' WHERE ' + a[0] + '=' + value + ' and ' + a[1] + '=' + value1 + ' and ' + a[2] + '=' + value2 + ' and ' + a[3] + '=' + value3 + ' and ' + a[4] + '=' + value4, function (err, response) {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        if (response != "") {
+                            resolve(response)
+                        } else {
+                            reject({
+                                statusCode: message.GENERICSTATUS.NOTFOUND,
+                                message: message.GENERIC.QUERY_NO_VALID
+                            });
+                        }
+                    }
+                });
+            } else {
+                reject({
+                    statusCode: message.GENERICSTATUS.ERROR,
+                    message: message.GENERIC.QUERY_MUST_BE_LESS_THAN_6
+                })
             }
-         }
+        })
     }
-     if(b===0){
-     console.log(where);
-     }
-     
-    // return new Promise((resolve, reject) => {
-    //   connection.query('SELECT * FROM '+Model+' WHERE'+ '')
-    // });
+
 }
+
 function getAll(Model) {
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM ' + Model, function (err, response) {

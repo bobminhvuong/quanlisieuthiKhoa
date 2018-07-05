@@ -9,11 +9,19 @@ module.exports = {
 }
 var Model = 'cartdetails'
 function getAllCartDetail(req, res) {
-    genericService.getAll(Model).then((Response) => {
-        res.send(Response);
-    }).catch((err) => {
-        res.send(err);
-    })
+    if (req.query) {
+        genericService.getAllByValue(req.query, Model).then((Response) => {
+            res.send(Response);
+        }).catch((err) => {
+            res.send(err);
+        })
+    } else {
+        genericService.getAll(Model).then((Response) => {
+            res.send(Response);
+        }).catch((err) => {
+            res.send(err);
+        })
+    }
 }
 function getCartDetailById(req, res) {
     genericService.getById(req.id, Model).then((Response) => {
@@ -29,15 +37,15 @@ function deleteCartDetailById(req, res) {
         res.send(err);
     })
 }
-function createCartDetail(req,res) {
+function createCartDetail(req, res) {
     cartDetailController.createCartDetails(req.body).then((Response) => {
         res.send(Response);
     }).catch((err) => {
         res.send(err);
     });
 }
-function updateCartDetail(req,res) {
-    cartDetailController.createCartDetails(req.params.id,req.body).then((Response) => {
+function updateCartDetail(req, res) {
+    cartDetailController.createCartDetails(req.params.id, req.body).then((Response) => {
         res.send(Response);
     }).catch((err) => {
         res.send(err);

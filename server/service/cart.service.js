@@ -17,7 +17,6 @@ function createCart(req) {
 }
 
 function updateCart(id, req) {
-
     return new Promise((resolve, reject) => {
         connection.query('SELECT * FROM carts WHERE id='+id,function(err,response){
             console.log(response[0].id);

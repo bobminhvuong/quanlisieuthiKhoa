@@ -69,11 +69,19 @@ function getUserById(req, res) {
     });
 }
 function getAllUser(req, res) {
-    genericService.getAll(User).then(function (response) {
-        res.send(response);
-    }).catch(function (err) {
-        res.send(err)
-    })
+    if (req.query) {
+        genericService.getAllByValue(req.query, Model).then((Response) => {
+            res.send(Response);
+        }).catch((err) => {
+            res.send(err);
+        })
+    } else {
+        genericService.getAll(Model).then((Response) => {
+            res.send(Response);
+        }).catch((err) => {
+            res.send(err);
+        })
+    }
 }
 function createUser(req, res) {
     var salt = crypto.genSalt();

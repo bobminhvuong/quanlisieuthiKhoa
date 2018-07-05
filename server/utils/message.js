@@ -6,6 +6,7 @@ module.exports = {
             USER_NOT_FOUND: 'USER_NOT_FOUND',
             USER_EXIST: 'USER_EXIST',
             EMAIL_EXIST: 'EMAIL_EXIST',
+            EMAIL_NOT_VALID: ' EMAIL_NOT_VALID',
             EMAIL_NOT_FOUND: 'EMAIL_NOT_FOUND',
             PASS_WRONG: 'PASS_WRONG',
         },
@@ -26,7 +27,9 @@ module.exports = {
         CREATED: 'CRATED',
         UPDATED: 'UPDATED',
         NOTFOUND: 'NOTFOUND',
-        DELETED: 'DELETED'
+        DELETED: 'DELETED',
+        QUERY_NO_VALID: 'QUERY_NO_VALID',
+        QUERY_MUST_BE_LESS_THAN_5:'QUERY_MUST_BE_LESS_THAN_6'
     },
     GENERICSTATUS: {
         CREATED: 200,
