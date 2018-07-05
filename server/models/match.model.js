@@ -28,5 +28,5 @@ var matchSchema = new mongoose.Schema({
         type: Number
     }
 });
-var Match= mongoose.model(matchSchema);
+var Match= mongoose.model('match',matchSchema);
 module.exports = Match;

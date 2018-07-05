@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 var userSchema = new mongoose.Schema({
   name: {
     type: String,
+    required: true
   },
   email: {
     type: String,
@@ -26,7 +27,8 @@ var userSchema = new mongoose.Schema({
     type: Number
   },
   gender: {
-    type: String
+    type: String,
+    required: true
   },
   birtday: {
     type: String

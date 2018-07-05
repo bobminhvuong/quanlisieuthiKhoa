@@ -1,4 +1,9 @@
 var userService = require('./../service/user.service');
+var User = require('./../service/generic.service');
+var genericService= require('./../service/generic.service');
+var crypto = require('./../utils/crypto');
+var message = require('./../utils/message');
+var jwt = require('./../utils/jwt');
 module.exports = {
     createUser: createUser,
     getAllUser: getAllUser,
@@ -38,10 +43,7 @@ function uploadAvatar(req, res) {
         });
 }
 function deleteUser(req, res) {
-    var request = {
-        id: req.params.id
-    }
-    userService.deleteUser(request).then(function (response) {
+    genericService.deleteById(req.params.id,User).then(function (response) {
         res.send(response)
     }).catch(function (err) {
         res.send(err)
@@ -60,31 +62,32 @@ function updateUser(req, res) {
     });
 }
 function getUserById(req, res) {
-    console.log('đã vào controller');
-    
-    var id = req.params.id;
-    userService.getUserById(id).then(function (response) {
+    genericService.getbyID(req.params.id,User).then(function (response) {
         res.send(response)
     }).catch(function (err) {
         res.send(err)
     });
 }
 function getAllUser(req, res) {
-    userService.getAllUser().then(function (response) {
+    genericService.getAll(User).then(function (response) {
         res.send(response);
     }).catch(function (err) {
         res.send(err)
     })
 }
 function createUser(req, res) {
+    var salt = crypto.genSalt();
     var request = {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        salt: salt,
+        password: crypto.hashWithSalt(req.body.password, salt),
         gender: req.body.gender,
         birtdate: req.body.birtdate,
+        updateAt: new Date(),
+        createdAt: new Date()
     };
-    userService.createUser(request).then(function (response) {
+    genericService.create(request,User).then(function (response) {
         res.send(response)
     }).catch(function (err) {
         res.send(err)

@@ -2,11 +2,12 @@
 module.exports = {
     ERROR_MESSAGE: {
         USER: {
-            USER_ERROR: 'USER+ERROR',
+            USER_ERROR: 'USER_ERROR',
+            USER_NOT_FOUND: 'USER_NOT_FOUND',
             USER_EXIST: 'USER_EXIST',
             EMAIL_EXIST: 'EMAIL_EXIST',
             EMAIL_NOT_FOUND: 'EMAIL_NOT_FOUND',
-            PASS_WRONG:'PASS_WRONG'
+            PASS_WRONG: 'PASS_WRONG',
         },
         RESTAURANT: {
             EXIT: 'RESTAURANT_EXIST',
@@ -18,24 +19,27 @@ module.exports = {
             NOT_AUTHORIZED: 'NOT_AUTHORIZED',
             INVALID_LOGIN_CREDENTIALS: 'INVALID_LOGIN_CREDENTIALS',
             NOT_SEND_SMS: 'NOT_SEND_SMS'
-          },
+        },
 
     },
-    GENERIC:{
+    GENERIC: {
         CREATED: 'CRATED',
         UPDATED: 'UPDATED',
         NOTFOUND: 'NOTFOUND',
-        DELETED:'DELETED'
+        DELETED: 'DELETED'
+    },
+    GENERICSTATUS: {
+        CREATED: 200,
+        UPDATED: 200,
+        NOTFOUND: 404,
+        DELETED: 200,
+        ACCEPTED: 202,
+        ERROR: 400
     },
     SUCCESS_MESSAGE: {
         USER: {
             CREATED: 'USER_CREATE',
             DELETED: 'USER_DELETE',
-            SUCCES: 'SUCCES'
-        },
-        RESTAURANT: {
-            CREATED: 'RESTAURANT_CREATE',
-            DELETED: 'RESTAURANT_DELETE',
             SUCCES: 'SUCCES'
         }
     },
