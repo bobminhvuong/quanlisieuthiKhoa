@@ -44,7 +44,7 @@ function createCompany(req, res) {
         res.send(err);
     })
 }
-function updateCompany() {
+function updateCompany(req,res) {
     companyController.updateCompany(req.params.id, req.body).then((Response) => {
         res.send(Response);
     }).catch((err) => {

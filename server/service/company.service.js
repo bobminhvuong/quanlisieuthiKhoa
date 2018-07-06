@@ -5,8 +5,8 @@ module.exports = {
 }
 function createCompany(req) {
     return new Promise((resolve, reject) => {
-        var records = [null, req.totalPrice, req.userCreate, new Date(), new Date(), req.idstatistics]
-        connection.query("INSERT INTO carts(id,totalPrice, userCreate,createAt,updateAt,idstatistics) VALUES (?)", [records], function (err, result) {
+        var records = [null, req.name, req.logo,req.address, req.phone, new Date()]
+        connection.query("INSERT INTO Companys (id,name, logo,address,phone,createAt) VALUES (?)", [records], function (err, result) {
             if (err) {
                 reject(err);
             } else {
@@ -17,18 +17,17 @@ function createCompany(req) {
 }
 function updateCompany(id, req) {
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM carts WHERE id='+id,function(err,response){
+        connection.query('SELECT * FROM Companys WHERE id='+id,function(err,response){
             if(err){
                 reject(err);
             }else{
                 if(response){
                     var NewData={
-                        totalPrice: req.totalPrice || response[0].totalPrice,
-                        userCreate: req.userCreate || response[0].userCreate,
-                        idstatistics: req.idstatistics || response[0].idstatistics,
-                        updateAt: req.updateAt
+                        name: req.name || response[0].name,
+                        logo: req.logo || response[0].logo,
+                        address: req.address || response[0].address
                     }
-                    connection.query('UPDATE `carts` SET `totalPrice`=' + NewData.totalPrice + ', `userCreate`=' + NewData.userCreate + ',`updateAt`=' + NewData.updateAt + ',`idstatistics`=' + NewData.idstatistics + ' WHERE id=' + id, function (err, result) {
+                    connection.query('UPDATE `carts` SET `name`="' + NewData.name + '", `logo`="' + NewData.logo + '",`address`="' + NewData.address +'" WHERE id=' + id, function (err, result) {
                         if (err) {
                             reject(err);
                         } else {

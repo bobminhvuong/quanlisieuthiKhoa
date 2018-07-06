@@ -5,5 +5,5 @@
         "host": "localhost:27017",
         "database": "phuigts"
     },
-    "TOKEN":"x-access-token'"
+    "TOKEN":"x-access-token"
 }

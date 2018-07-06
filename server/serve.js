@@ -17,9 +17,7 @@ app.use('/public', express.static('public'))
 app.use('/user', require('./routes/user.route')());
 app.use('/auth', require('./routes/auth.route')());
 app.use('/cart',require('./routes/cart.route')());
-app.use('/cartdetails',require('./routes/cartdetails.route')());
 app.use('/company',require('./routes/company.route')());
-app.use('/image',require('./routes/image.route')());
 app.use('/merchandise',require('./routes/merchandise.route')());
 app.use('/merchandisedetail',require('./routes/merchandisedetails.route')());
 app.use('/product',require('./routes/product.route')());

@@ -32,12 +32,12 @@ function getUserByToken(token){
                 if(err){
                     reject(err);
                 }else{
-                    var email=decodeData.email;
-                    connection.query('SELECT * FROM user WHERE email='+email,function(err,response){
+                    var email=decodeData[0].email;
+                    connection.query('SELECT * FROM user WHERE email="'+email+'"',function(err,response){
                         if(err){
                             reject(err);
                         }else{
-                            resolve(convertUserModelToUserResponse(response[0]));
+                            resolve(response[0]);
                         }
                     })
                 }
@@ -47,7 +47,7 @@ function getUserByToken(token){
 }
 function login(req){
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * from admin where admin.email_admin="' + req.email + '" and admin.matkhau="' + req.password + '"', function (err, response) {
+        connection.query('SELECT * from user where email="' + req.email + '" and password="' + req.password + '"', function (err, response) {
             if (err) {
                 reject(err)
             } else {
@@ -70,6 +70,8 @@ function login(req){
     
 }
 function convertUserModelToUserResponse(userModel) {
+    console.log(userModel);
+    
     var userObj = userModel.toObject();
     delete userObj.password;
     delete userObj.salt;

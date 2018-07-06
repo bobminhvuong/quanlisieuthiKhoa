@@ -6,9 +6,10 @@ module.exports = {
 }
 
 function createCatalog(req) {
+    console.log(req);
     return new Promise((resolve, reject) => {
-        var records = [null, req.totalPrice, req.userCreate, new Date(), new Date(), req.idstatistics]
-        connection.query("INSERT INTO carts(id,totalPrice, userCreate,createAt,updateAt,idstatistics) VALUES (?)", [records], function (err, result) {
+        var records = [null, req.name,req.userCreate,new Date(), new Date()]
+        connection.query("INSERT INTO catalogs(id,name,userCreate,createAt,updateAt) VALUES (?)", [records], function (err, result) {
             if (err) {
                 reject(err);
             } else {
@@ -19,23 +20,16 @@ function createCatalog(req) {
 }
 
 function updateCatalog(id, req) {
-
     return new Promise((resolve, reject) => {
-        connection.query('SELECT * FROM carts WHERE id='+id,function(err,response){
-            console.log(response[0].id);
-            
+        connection.query('SELECT * FROM catalogs WHERE id='+id,function(err,response){
             if(err){
                 reject(err);
             }else{
                 if(response){
                     var NewData={
-                        totalPrice: req.totalPrice || response[0].totalPrice,
-                        userCreate: req.userCreate || response[0].userCreate,
-                        idstatistics: req.idstatistics || response[0].idstatistics,
-                        updateAt: req.updateAt
-
+                        name: req.name || response[0].name,
                     }
-                    connection.query('UPDATE `carts` SET `totalPrice`=' + NewData.totalPrice + ', `userCreate`=' + NewData.userCreate + ',`updateAt`=' + NewData.updateAt + ',`idstatistics`=' + NewData.idstatistics + ' WHERE id=' + id, function (err, result) {
+                    connection.query('UPDATE `carts` SET `totalPrice`="' + NewData.name+'" WHERE id=' + id, function (err, result) {
                         if (err) {
                             reject(err);
                         } else {

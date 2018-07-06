@@ -38,14 +38,15 @@ function deleteCatalogById(req, res) {
     })
 }
 function createCatalog(req, res) {
-    catalogDetail.createCatalog(Model).then((Response) => {
+    catalogDetail.createCatalog(req.body).then((Response) => {
         res.send(Response);
     }).catch((err) => {
         res.send(err);
     })
 }
 function updateCatalog(req, res) {
-    catalogDetail.updateCatalog(req.params.id, Model).then((Response) => {
+    
+    catalogDetail.updateCatalog(req.params.id,req.body).then((Response) => {
         res.send(Response);
     }).catch((err) => {
         res.send(err);
