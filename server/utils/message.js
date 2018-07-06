@@ -1,6 +1,10 @@
 
 module.exports = {
     ERROR_MESSAGE: {
+        CART:{
+            CART_ERROR: 'CART_ERROR',
+            CART_NOTFOUND: 'CART_NOTFOUND'
+        },
         USER: {
             USER_ERROR: 'USER_ERROR',
             USER_NOT_FOUND: 'USER_NOT_FOUND',
@@ -44,6 +48,10 @@ module.exports = {
             CREATED: 'USER_CREATE',
             DELETED: 'USER_DELETE',
             SUCCES: 'SUCCES'
+        },
+        CART:{
+            CART_CREATED: ' CART_CREATED',
+            CART_DELETED: 'CART_DELETE',
         }
     },
     STATUS_CODE: {

@@ -6,8 +6,8 @@ module.exports = {
 
 function createCartDetails(req) {
     return new Promise((resolve, reject) => {
-        var records = [null, req.totalPrice, req.userCreate, new Date(), new Date(), req.idstatistics]
-        connection.query("INSERT INTO carts(id,totalPrice, userCreate,createAt,updateAt,idstatistics) VALUES (?)", [records], function (err, result) {
+        var records = [null, req.idProduct, req.price, req.quantitys, req.totalPrice, req.idCart]
+        connection.query("INSERT INTO carts(id,idProduct, price,quantitys,totalPrice,idCart) VALUES (?)", [records], function (err, result) {
             if (err) {
                 reject(err);
             } else {
@@ -28,10 +28,10 @@ function updateCartDetails(id, req) {
             }else{
                 if(response){
                     var NewData={
-                        totalPrice: req.totalPrice || response[0].totalPrice,
-                        userCreate: req.userCreate || response[0].userCreate,
-                        idstatistics: req.idstatistics || response[0].idstatistics,
-                        updateAt: req.updateAt
+                        idProduct: req.idProduct || response[0].totalPrice,
+                        price: req.price || response[0].userCreate,
+                        totalPrice: req.totalPrice || response[0].idstatistics,
+                        idCart: req.idCart
 
                     }
                     connection.query('UPDATE `carts` SET `totalPrice`=' + NewData.totalPrice + ', `userCreate`=' + NewData.userCreate + ',`updateAt`=' + NewData.updateAt + ',`idstatistics`=' + NewData.idstatistics + ' WHERE id=' + id, function (err, result) {
