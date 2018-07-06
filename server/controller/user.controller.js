@@ -13,6 +13,7 @@ module.exports = {
     uploadAvatar: uploadAvatar,
     getUserByEmail: getUserByEmail
 }
+var Model = 'user'
 function getUserByEmail(req, res) {
     var email = req.params.email;
     userService.getUserByEmail(email)
@@ -69,13 +70,15 @@ function getUserById(req, res) {
     });
 }
 function getAllUser(req, res) {
-    if (req.query) {
+    if (Object.keys(req.query).length>0) {
         genericService.getAllByValue(req.query, Model).then((Response) => {
             res.send(Response);
         }).catch((err) => {
             res.send(err);
         })
     } else {
+        console.log(1212);
+        
         genericService.getAll(Model).then((Response) => {
             res.send(Response);
         }).catch((err) => {
@@ -84,18 +87,7 @@ function getAllUser(req, res) {
     }
 }
 function createUser(req, res) {
-    var salt = crypto.genSalt();
-    var request = {
-        name: req.body.name,
-        email: req.body.email,
-        salt: salt,
-        password: crypto.hashWithSalt(req.body.password, salt),
-        gender: req.body.gender,
-        birtdate: req.body.birtdate,
-        updateAt: new Date(),
-        createdAt: new Date()
-    };
-    genericService.create(request,User).then(function (response) {
+    userService.createUser(req.body).then(function (response) {
         res.send(response)
     }).catch(function (err) {
         res.send(err)

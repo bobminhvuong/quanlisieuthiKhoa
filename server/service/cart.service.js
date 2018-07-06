@@ -59,7 +59,7 @@ function createCart(req) {
                 reject(err);
             } else {
                 if (result.insertId) {
-                    req.idProduct.forEach(element => {
+                    req.Product.forEach(element => {
                         genericService.getById(element.id, 'products').then((product) => {
                             var records = [null, element.id, product.name, element.quantitys, product.price, product.price * element.quantitys, result.insertId]
                             connection.query("INSERT INTO cartdetails(id,idProduct,nameProduct,quantitys,price,totalPrice,idCart) VALUES (?)", [records], function (err, cartdetail) {
@@ -107,7 +107,6 @@ function createCart(req) {
                 }
             }
         });
-
     })
 }
 function updateCart(id, req) {
@@ -132,10 +131,8 @@ function updateCart(id, req) {
                 }
             }
         })
-
     })
 }
-
 function setTotalPriceCart(totalPrice, id) {
     connection.query('UPDATE carts set totalPrice=' + totalPrice + ' WHERE id=' + id)
 }

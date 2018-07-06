@@ -6,10 +6,9 @@ module.exports = {
 }
 
 function createCatalog(req) {
-    console.log(req);
     return new Promise((resolve, reject) => {
-        var records = [null, req.name,req.userCreate,new Date(), new Date()]
-        connection.query("INSERT INTO catalogs(id,name,userCreate,createAt,updateAt) VALUES (?)", [records], function (err, result) {
+        var records = [null, req.name,req.userCreate,new Date()]
+        connection.query("INSERT INTO catalogs(id,name,userCreate,createAt) VALUES (?)", [records], function (err, result) {
             if (err) {
                 reject(err);
             } else {

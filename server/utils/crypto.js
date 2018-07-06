@@ -14,8 +14,6 @@ function genSalt(){
 function hashWithSalt(password, salt) {
     return crypto.pbkdf2Sync(password, salt, 1000, 128, 'sha1').toString('base64');
 }
-
-
 module.exports = {
     hashWithSalt: hashWithSalt,
     genSalt: genSalt,

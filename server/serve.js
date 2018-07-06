@@ -19,7 +19,6 @@ app.use('/auth', require('./routes/auth.route')());
 app.use('/cart',require('./routes/cart.route')());
 app.use('/company',require('./routes/company.route')());
 app.use('/merchandise',require('./routes/merchandise.route')());
-app.use('/merchandisedetail',require('./routes/merchandisedetails.route')());
 app.use('/product',require('./routes/product.route')());
 app.use('/statiscs',require('./routes/statistics.route')());
 app.use('/catalog',require('./routes/catalog.route')());
